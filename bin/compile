@@ -33,7 +33,8 @@ NGINX_CACHE_DIR=$CACHE_DIR/nginx-dist/usr/local/nginx
 
 if [ ! -d $NGINX_CACHE_DIR ]
 then
-(	
+
+(
 	cd $CACHE_DIR && 
 	echo "Downloading $nginx_tarball_url"
 	curl --silent -L ${nginx_tarball_url} | tar xzv
@@ -64,4 +65,3 @@ echo "export NGINX_BASE_DIR=$NGINX_BASE_DIR" >> $BUILD_SCRIPT
 echo 'export PATH="$NGINX_BASE_DIR/sbin:$PATH"' >> $BUILD_SCRIPT
 
 logger -p user.notice -t "slugc[$$]" "nnginx_build_pack nginx_install_end $LOGGER_FLAGS"
-
