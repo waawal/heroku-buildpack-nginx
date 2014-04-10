@@ -32,7 +32,7 @@ fi
 
 cp -R $NGINX_CACHE_DIR $BUILD_DIR
 
-NGINX_BASE_DIR=$BUILD_DIR/nginx-dist/usr/local/nginx
+NGINX_BASE_DIR=./nginx-dist/usr/local/nginx
 
 BUILD_SCRIPT="$BUILD_DIR/.profile.d/nginx.sh"
 mkdir -p $(dirname $BUILD_SCRIPT)
