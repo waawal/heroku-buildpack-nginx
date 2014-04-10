@@ -27,7 +27,7 @@ if [ ! -d $NGINX_CACHE_DIR ]
 then
 	( cd $CACHE_DIR && 
 	  curl --silent --location https://s3-eu-west-1.amazonaws.com/ray-s3-test/nginx/nginx-1.4.4-pagespeed-1.7.30.tgz |
-	  tar xf - )
+	  tar xzf - )
 fi
 
 cp -R $NGINX_CACHE_DIR $BUILD_DIR
