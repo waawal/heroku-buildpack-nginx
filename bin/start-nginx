@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+#Evaluate config to get $PORT
+erb config/nginx.conf.erb > nginx.conf
+
+#Start log redirection.
+(
+	#Initialize log directory.
+	mkdir -p ${NGINX_BASE_DIR}/logs/nginx
+	touch ${NGINX_BASE_DIR}/logs/nginx/access.log ${NGINX_BASE_DIR}/logs/nginx/error.log
+	#Redirect NGINX logs to stdout.
+	echo 'buildpack=nginx at=logs-initialized'
+	tail -qF -n 0 ${NGINX_BASE_DIR}logs/nginx/*.log
+) &
+
+#Start NGINX
+#We expect nginx to run in foreground.
+echo 'buildpack=nginx at=nginx-start'
+nginx -p . -c nginx.conf

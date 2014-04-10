@@ -6,11 +6,11 @@ set -e
 
 NGINX_VERSION=1.5.7
 PCRE_VERSION=8.21
-#PAGESPEED_VERSION=0.23
+PAGESPEED_VERSION=1.7.30.4-beta
 
 nginx_tarball_url=http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz
 pcre_tarball_url=http://garr.dl.sourceforge.net/project/pcre/pcre/${PCRE_VERSION}/pcre-${PCRE_VERSION}.tar.bz2
-ps_tarball_url=https://s3-eu-west-1.amazonaws.com/ray-s3-test/nginx/ngx_pagespeed-release-1.7.30.4-beta.tgz
+ps_tarball_url=https://s3-eu-west-1.amazonaws.com/ray-s3-test/nginx/ngx_pagespeed-release-${PAGESPEED_VERSION}.tgz
 
 logger -p user.notice -t "slugc[$$]" "nnginx_build_pack nginx_install_start"
 
@@ -36,19 +36,19 @@ then
 (	
 	cd $CACHE_DIR && 
 	echo "Downloading $nginx_tarball_url"
-	curl --silent -L $nginx_tarball_url | tar xzv
+	curl --silent -L ${nginx_tarball_url} | tar xzv
 
 	echo "Downloading $pcre_tarball_url"
-	(cd nginx-${NGINX_VERSION} && curl -L $pcre_tarball_url | tar xvj )
+	(cd nginx-${NGINX_VERSION} && curl -L ${pcre_tarball_url} | tar xvj )
 
 	echo "Downloading $ps_tarball_url"
-	curl --silent -L $pcre_tarball_url | tar xzv
+	curl --silent -L ${ps_tarball_url} | tar xzv
 
 	cd nginx-${NGINX_VERSION}
 	./configure \
 		--with-pcre=pcre-${PCRE_VERSION} \
-		--prefix=$BIN_DIR \
-		--add-module=--add-module=../ngx_pagespeed-release-1.7.30.4-beta
+		--prefix=${BIN_DIR} \
+		--add-module=--add-module=../ngx_pagespeed-release-${PAGESPEED_VERSION}
 	make install
 )
 
