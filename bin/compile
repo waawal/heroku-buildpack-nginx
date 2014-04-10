@@ -37,19 +37,19 @@ then
 (
 	cd $CACHE_DIR && 
 	echo "Downloading $nginx_tarball_url"
-	curl --silent -L ${nginx_tarball_url} | tar xzv
+	curl --silent -L ${nginx_tarball_url} | tar xz
 
 	echo "Downloading $pcre_tarball_url"
-	(cd nginx-${NGINX_VERSION} && curl -L ${pcre_tarball_url} | tar xvj )
+	(cd nginx-${NGINX_VERSION} && curl --silent -L ${pcre_tarball_url} | tar xj )
 
 	echo "Downloading $ps_tarball_url"
-	curl --silent -L ${ps_tarball_url} | tar xzv
+	curl --silent -L ${ps_tarball_url} | tar xz
 
 	cd nginx-${NGINX_VERSION}
 	./configure \
 		--with-pcre=pcre-${PCRE_VERSION} \
 		--prefix=${BIN_DIR} \
-		--add-module=--add-module=../ngx_pagespeed-release-${PAGESPEED_VERSION}
+		--add-module=../ngx_pagespeed-release-${PAGESPEED_VERSION}
 	make install
 )
 
