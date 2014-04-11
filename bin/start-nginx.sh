@@ -7,9 +7,9 @@ CONFIG_FILE=nginx.conf.parsed
 #Evaluate config to get $PORT
 if [ -f nginx.conf ]
 then
-    erb nginx.conf > ${CONFIG_FILE}
+    erb /app/nginx.conf > ${CONFIG_FILE}
 else
-    erb config/nginx.conf.erb > ${CONFIG_FILE}
+    erb /app/config/nginx.conf.erb > ${CONFIG_FILE}
 fi
 
 #Start log redirection.
