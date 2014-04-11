@@ -31,8 +31,8 @@ mkdir -p ${BUILD_DIR}
 
 NGINX_CACHE_DIR=${CACHE_DIR}/nginx-${NGINX_VERSION}
 
-if [ ! -d ${NGINX_CACHE_DIR} ]
-then
+#if [ ! -d ${NGINX_CACHE_DIR} ]
+#then
 
 (
 	cd $CACHE_DIR &&
@@ -60,7 +60,7 @@ then
 	make install
 )
 
-fi
+#fi
 
 cp -R ${BIN_DIR} ${BUILD_DIR}
 
