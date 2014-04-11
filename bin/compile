@@ -24,18 +24,19 @@ ENV_DIR=$3
 LOGGER_FLAGS=""
 
 #create the dirs if needed
-mkdir -p $CACHE_DIR
-mkdir -p $BUILD_DIR
+mkdir -p ${CACHE_DIR}
+mkdir -p ${BUILD_DIR}
 
 # Default nginx install from our dist is in ./nginx-dist/usr/local/nginx
 
-NGINX_CACHE_DIR=$CACHE_DIR/nginx-dist/usr/local/nginx
+NGINX_CACHE_DIR=${CACHE_DIR}/nginx-${NGINX_VERSION}
 
-if [ ! -d $NGINX_CACHE_DIR ]
+if [ ! -d ${NGINX_CACHE_DIR} ]
 then
 
 (
-	cd $CACHE_DIR && 
+	cd $CACHE_DIR &&
+	pwd
 	echo "Downloading $nginx_tarball_url"
 	curl --silent -L ${nginx_tarball_url} | tar xz
 
@@ -45,17 +46,23 @@ then
 	echo "Downloading $ps_tarball_url"
 	curl --silent -L ${ps_tarball_url} | tar xz
 
+	echo "Running configure for NGINX"
 	cd nginx-${NGINX_VERSION}
-	./configure \
+	./configure --silent \
 		--with-pcre=pcre-${PCRE_VERSION} \
 		--prefix=${BIN_DIR} \
 		--add-module=../ngx_pagespeed-release-${PAGESPEED_VERSION}
+
+	echo "Building NGINX"
+	make --quiet
+
+	echo "Installing NGINX"
 	make install
 )
 
 fi
 
-cp -R $NGINX_CACHE_DIR $BUILD_DIR
+cp -R ${NGINX_CACHE_DIR} ${BUILD_DIR}
 
 NGINX_BASE_DIR=./nginx
 
