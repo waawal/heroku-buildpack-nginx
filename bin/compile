@@ -64,6 +64,8 @@ fi
 
 cp -R ${BIN_DIR} ${BUILD_DIR}
 
+cp start-nginx.sh ${BUILD_DIR}
+
 NGINX_BASE_DIR=./nginx-${NGINX_VERSION}
 
 BUILD_SCRIPT="$BUILD_DIR/.profile.d/nginx.sh"
