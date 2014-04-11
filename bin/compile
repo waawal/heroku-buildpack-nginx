@@ -71,13 +71,19 @@ NGINX_CACHE_DIR=${CACHE_DIR}/nginx-${NGINX_VERSION}
 
 cp -R ${BIN_DIR} ${CACHE_DIR}
 
-cp ../start-nginx.sh ${CACHE_DIR}
+pwd
+
+ls /app
+
+ls ${BIN_DIR}
+
+cp ${BIN_DIR}/start-nginx.sh ${CACHE_DIR}
 
 NGINX_BASE_DIR=./nginx-${NGINX_VERSION}
 
-BUILD_SCRIPT="$BUILD_DIR/.profile.d/nginx.sh"
-mkdir -p $(dirname $BUILD_SCRIPT)
-echo "export NGINX_BASE_DIR=$NGINX_BASE_DIR" > $BUILD_SCRIPT
-echo 'export PATH="$NGINX_BASE_DIR/sbin:$PATH"' >> $BUILD_SCRIPT
+BUILD_TARGET="$BUILD_DIR/.profile.d/nginx.sh"
+mkdir -p $(dirname $BUILD_TARGET)
+echo "export NGINX_BASE_DIR=$NGINX_BASE_DIR" > ${BUILD_TARGET}
+echo 'export PATH="$NGINX_BASE_DIR/sbin:$PATH"' >> ${BUILD_TARGET}
 
 logger -p user.notice -t "slugc[$$]" "nnginx_build_pack nginx_install_end $LOGGER_FLAGS"
