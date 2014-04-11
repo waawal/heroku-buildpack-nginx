@@ -71,11 +71,15 @@ fi
 
 NGINX_BASE_DIR=./nginx-${NGINX_VERSION}
 
-cp ${BIN_DIR}/start-nginx.sh ${BUILD_DIR}
+cp -R ${BIN_DIR}/../config ${BUILD_DIR}/config
 
 cp -R ${BIN_DIR} ${BUILD_DIR}/nginx-${NGINX_VERSION}
 
+cp ${BIN_DIR}/start-nginx.sh ${BUILD_DIR}
+
 ls ${BUILD_DIR}
+ls ${BUILD_DIR}/config
+ls ${BUILD_DIR}/nginx-${NGINX_VERSION}
 
 BUILD_TARGET="$BUILD_DIR/.profile.d/nginx.sh"
 mkdir -p $(dirname ${BUILD_TARGET})
