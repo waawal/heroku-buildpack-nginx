@@ -26,13 +26,13 @@ LOGGER_FLAGS=""
 set -x
 
 #create the dirs if needed
-mkdir -p ${CACHE_DIR}
-
 rm -rf ${CACHE_DIR}
 
-mkdir -p ${BUILD_DIR}
+mkdir -p ${CACHE_DIR}
 
 rm -rf  ${BUILD_DIR}
+
+mkdir -p ${BUILD_DIR}
 
 # Default nginx install from our dist is in ./nginx-dist/usr/local/nginx
 
@@ -42,7 +42,7 @@ NGINX_CACHE_DIR=${CACHE_DIR}/nginx-${NGINX_VERSION}
 #then
 
 (
-	cd $CACHE_DIR &&
+	cd ${CACHE_DIR} &&
 	pwd
 	echo "Downloading $nginx_tarball_url"
 	curl --silent -L ${nginx_tarball_url} | tar xz
