@@ -71,7 +71,7 @@ NGINX_CACHE_DIR=${CACHE_DIR}/nginx-${NGINX_VERSION}
 
 cp -R ${BIN_DIR} ${CACHE_DIR}
 
-cp start-nginx.sh ${CACHE_DIR}
+cp ../start-nginx.sh ${CACHE_DIR}
 
 NGINX_BASE_DIR=./nginx-${NGINX_VERSION}
 
