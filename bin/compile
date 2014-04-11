@@ -25,7 +25,12 @@ LOGGER_FLAGS=""
 
 #create the dirs if needed
 mkdir -p ${CACHE_DIR}
+
+rm -rf ${CACHE_DIR}
+
 mkdir -p ${BUILD_DIR}
+
+rm -rf  ${BUILD_DIR}
 
 # Default nginx install from our dist is in ./nginx-dist/usr/local/nginx
 
