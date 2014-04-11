@@ -69,9 +69,9 @@ NGINX_CACHE_DIR=${CACHE_DIR}/nginx-${NGINX_VERSION}
 
 #fi
 
-cp -R ${BIN_DIR} ${BUILD_DIR}
+cp -R ${BIN_DIR} ${CACHE_DIR}
 
-cp start-nginx.sh ${BUILD_DIR}
+cp start-nginx.sh ${CACHE_DIR}
 
 NGINX_BASE_DIR=./nginx-${NGINX_VERSION}
 
