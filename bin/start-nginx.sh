@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -x
+
 CONFIG_FILE=nginx.conf.parsed
 
 #Evaluate config to get $PORT
