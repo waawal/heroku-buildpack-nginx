@@ -48,13 +48,13 @@ then
 
 	echo "Running configure for NGINX"
 	cd nginx-${NGINX_VERSION}
-	./configure --silent \
+	./configure \
 		--with-pcre=pcre-${PCRE_VERSION} \
 		--prefix=${BIN_DIR} \
-		--add-module=../ngx_pagespeed-release-${PAGESPEED_VERSION}
+		--add-module=../ngx_pagespeed-release-${PAGESPEED_VERSION} > /dev/null
 
 	echo "Building NGINX"
-	make --quiet
+	make > /dev/null
 
 	echo "Installing NGINX"
 	make install
