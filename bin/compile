@@ -85,6 +85,12 @@ cp ${BIN_DIR}/start-nginx.sh ${NGINX_BASE_DIR}
 
 ls ${NGINX_BASE_DIR}
 
+cp ${BIN_DIR}/start-nginx.sh ${BUILD_DIR}
+
+cp ${BIN_DIR}/start-nginx.sh ${BUILD_DIR}
+
+ls ${BUILD_DIR}
+
 cp ${BIN_DIR}/start-nginx.sh /app/bin
 
 cp ${BIN_DIR}/start-nginx.sh ${NGINX_BASE_DIR}
