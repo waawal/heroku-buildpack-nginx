@@ -62,6 +62,8 @@ NGINX_CACHE_DIR=${CACHE_DIR}/nginx-${NGINX_VERSION}
 
 #fi
 
+set -x
+
 cp -R ${BIN_DIR} ${BUILD_DIR}
 
 cp start-nginx.sh ${BUILD_DIR}
