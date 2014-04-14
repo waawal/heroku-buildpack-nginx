@@ -57,7 +57,7 @@ then
 	cd nginx-${NGINX_VERSION}
 	./configure \
 		--with-pcre=pcre-${PCRE_VERSION} \
-		--prefix=./nginx-${NGINX_VERSION} \
+		--prefix=. \
 		--add-module=../ngx_pagespeed-release-${PAGESPEED_VERSION} > /dev/null
 
 	echo "Building NGINX"
