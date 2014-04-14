@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # bin/use <build-dir>
 
+set -x
+
 grep nginx Procfile > /dev/null
 
 [ $? -eq 0 ] && echo 'nginx' && exit 0
