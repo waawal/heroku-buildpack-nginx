@@ -73,8 +73,6 @@ NGINX_BASE_DIR=./nginx-${NGINX_VERSION}
 
 cp -R ${BIN_DIR}/../config ${BUILD_DIR}/config
 
-#cp -R ${BIN_DIR} ${BUILD_DIR}/nginx-${NGINX_VERSION}
-
 cp ${BIN_DIR}/start-nginx.sh ${BUILD_DIR}
 
 ls ${BUILD_DIR}
