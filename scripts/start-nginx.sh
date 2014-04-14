@@ -10,12 +10,14 @@ CONFIG_FILE=nginx.conf.parsed
 # Filter config file usng erb to get $PORT
 if [ -f nginx.conf.erb ]
 then
-    erb nginx.conf > ${CONFIG_FILE}
+    erb nginx.conf.erb > ${CONFIG_FILE}
 elif [ -f config/nginx.conf.erb ]
 then
     erb config/nginx.conf.erb > ${CONFIG_FILE}
 else
-    echo 'no suitable config found' && exit 1
+    echo 'buildpack=nginx at=nginx-start-fail'
+    echo 'no suitable config found'
+    exit 1
 fi
 
 #Start log redirection.
@@ -34,6 +36,16 @@ fi
 # 1) the 'daemon off' directive should be set in the config file
 # 2) we use -p . to ensure that we don't use the default prefix from the build process
 
-echo 'buildpack=nginx at=nginx-start'
 
 ( nginx -p . -c ${CONFIG_FILE} ) &
+
+running=$(ps -ef | grep nginx)
+
+if [ -n ${running} ]
+then
+    echo 'buildpack=nginx at=nginx-start-complete'
+    exit 0
+else
+    echo 'buildpack=nginx at=nginx-start-not-starting'
+    exit 1
+fi
