@@ -39,9 +39,9 @@ fi
 
 ( nginx -p . -c ${CONFIG_FILE} ) &
 
-running=$(ps -ef | grep nginx)
+running=$(ps -ef | grep nginx | grep -v grep)
 
-if [ -n ${running} ]
+if [ -n "${running}" ]
 then
     echo 'buildpack=nginx at=nginx-start-complete'
     exit 0
