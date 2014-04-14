@@ -37,15 +37,4 @@ fi
 # 2) we use -p . to ensure that we don't use the default prefix from the build process
 
 
-( nginx -p . -c ${CONFIG_FILE} ) &
-
-running=$(ps -ef | grep nginx | grep -v grep)
-
-if [ -n "${running}" ]
-then
-    echo 'buildpack=nginx at=nginx-start-complete'
-    exit 0
-else
-    echo 'buildpack=nginx at=nginx-start-not-starting'
-    exit 1
-fi
+nginx -p . -c ${CONFIG_FILE}
