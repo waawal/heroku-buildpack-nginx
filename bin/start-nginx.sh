@@ -27,4 +27,4 @@ fi
 #Start NGINX
 #We expect nginx to run in foreground.
 echo 'buildpack=nginx at=nginx-start'
-nginx -c ${CONFIG_FILE}
+nginx -p . -c ${CONFIG_FILE}
