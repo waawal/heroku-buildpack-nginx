@@ -27,9 +27,9 @@ http {
 	pagespeed on;
 	pagespeed Statistics on;
 	pagespeed StatisticsLogging on;
-	pagespeed LogDir /var/log/pagespeed;
+	pagespeed LogDir logs/pagespeed;
 
-	pagespeed FileCachePath /var/ngx_pagespeed_cache;
+	pagespeed FileCachePath cache/ngx_pagespeed_cache;
 	pagespeed ModPagespeedRewriteLevel PassThrough;
 
 	pagespeed Domain *.toyota.it;
@@ -37,7 +37,6 @@ http {
 
 	pagespeed EnableFilters combine_css,extend_cache,rewrite_images;
 	pagespeed EnableFilters rewrite_css,rewrite_javascript,combine_javascript,lazyload_images,insert_dns_prefetch,inline_javascript,outline_javascript,sprite_images;
-
 
 	server {
 		listen <%= ENV["PORT"] %>;
