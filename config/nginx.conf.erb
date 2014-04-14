@@ -28,8 +28,8 @@ http {
 	pagespeed Statistics on;
 	pagespeed StatisticsLogging on;
 
-	pagespeed LogDir <%= ENV['PWD'] || /app %>/logs/pagespeed; # Pagespeed dirs must start with a / (because Google says)
-	pagespeed FileCachePath <%= ENV['PWD'] || /app %>/cache/ngx_pagespeed_cache; # Pagespeed dirs must start with a / (because Google says)
+	pagespeed LogDir <%= ENV['PWD'] || '/app' %>/logs/pagespeed; # Pagespeed dirs must start with a / (because Google says)
+	pagespeed FileCachePath <%= ENV['PWD'] || '/app' %>/cache/ngx_pagespeed_cache; # Pagespeed dirs must start with a / (because Google says)
 
 	pagespeed ModPagespeedRewriteLevel PassThrough;
 
@@ -40,7 +40,7 @@ http {
 	pagespeed EnableFilters rewrite_css,rewrite_javascript,combine_javascript,lazyload_images,insert_dns_prefetch,inline_javascript,outline_javascript,sprite_images;
 
 	server {
-		listen <%= ENV["PORT"] %>;
+		listen <%= ENV['PORT'] %>;
 		server_name _;
 		keepalive_timeout 65;
 
