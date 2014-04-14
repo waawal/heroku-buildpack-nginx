@@ -27,9 +27,9 @@ http {
 	pagespeed on;
 	pagespeed Statistics on;
 	pagespeed StatisticsLogging on;
-	pagespeed LogDir logs/pagespeed;
+	pagespeed LogDir <%= ENV['PWD'] || /app %>/logs/pagespeed;
 
-	pagespeed FileCachePath cache/ngx_pagespeed_cache;
+	pagespeed FileCachePath <%= ENV['PWD'] || /app %>/cache/ngx_pagespeed_cache;
 	pagespeed ModPagespeedRewriteLevel PassThrough;
 
 	pagespeed Domain *.toyota.it;
