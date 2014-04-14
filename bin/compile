@@ -21,6 +21,11 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 ENV_DIR=$3
 
+echo checking Build Dir contents
+ls -l ${BUILD_DIR}
+
+exit 1
+
 LOGGER_FLAGS=""
 
 #create the dirs if needed

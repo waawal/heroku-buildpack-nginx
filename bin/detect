@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 # bin/use <build-dir>
 
-set -x
+exit 0
+
+## where is that damn Procfile
 
 grep nginx Procfile > /dev/null
 
