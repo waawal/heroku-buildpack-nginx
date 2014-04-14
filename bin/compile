@@ -12,7 +12,7 @@ nginx_tarball_url=http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz
 pcre_tarball_url=http://garr.dl.sourceforge.net/project/pcre/pcre/${PCRE_VERSION}/pcre-${PCRE_VERSION}.tar.bz2
 ps_tarball_url=https://s3-eu-west-1.amazonaws.com/ray-s3-test/nginx/ngx_pagespeed-release-${PAGESPEED_VERSION}.tgz
 
-logger -p user.notice -t "slugc[$$]" "nnginx_build_pack nginx_install_start"
+logger -p user.notice -t "slugc[$$]" "nginx_build_pack nginx_install_start"
 
 BIN_DIR=$(cd $(dirname $0); pwd) # absolute path
 
@@ -23,8 +23,6 @@ ENV_DIR=$3
 
 LOGGER_FLAGS=""
 
-set -x
-
 #create the dirs if needed
 mkdir -p ${CACHE_DIR}
 
@@ -34,8 +32,8 @@ mkdir -p ${BUILD_DIR}
 
 NGINX_CACHE_DIR=${CACHE_DIR}/nginx-${NGINX_VERSION}
 
-#if [ ! -d ${NGINX_CACHE_DIR} ]
-#then
+if [ ! -d ${NGINX_CACHE_DIR} ]
+then
 
 (
 	cd ${CACHE_DIR} &&
@@ -63,7 +61,7 @@ NGINX_CACHE_DIR=${CACHE_DIR}/nginx-${NGINX_VERSION}
 	make install
 )
 
-#fi
+fi
 
 cp -R ${NGINX_CACHE_DIR}/dist/nginx-${NGINX_VERSION} ${BUILD_DIR}
 
@@ -71,10 +69,12 @@ cp -R ${BIN_DIR}/../config ${BUILD_DIR}/config
 
 cp ${BIN_DIR}/../scripts/start-nginx.sh ${BUILD_DIR}
 
+chmod +x ${BUILD_DIR}/*.sh
+
 BUILD_TARGET="$BUILD_DIR/.profile.d/nginx.sh"
 mkdir -p $(dirname ${BUILD_TARGET})
 echo "export NGINX_VERSION=nginx-${NGINX_VERSION}" > ${BUILD_TARGET}
 echo 'export NGINX_BASE_DIR=~/${NGINX_VERSION}' >> ${BUILD_TARGET}
 echo 'export PATH="$NGINX_BASE_DIR/sbin:$PATH"' >> ${BUILD_TARGET}
 
-logger -p user.notice -t "slugc[$$]" "nnginx_build_pack nginx_install_end $LOGGER_FLAGS"
+logger -p user.notice -t "slugc[$$]" "nginx_build_pack nginx_install_end $LOGGER_FLAGS"

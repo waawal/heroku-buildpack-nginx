@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 
+echo 'buildpack=nginx at=nginx-start-begin'
+
 # fail fast
 set -e
-
-#debug
-set -x
 
 CONFIG_FILE=nginx.conf.parsed
 
