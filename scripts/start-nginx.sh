@@ -23,12 +23,12 @@ fi
 #Start log redirection.
 (
 	#Initialize log directory.
-	mkdir -p logs/nginx
-	touch logs/nginx/access.log logs/nginx/error.log
+	mkdir -p logs
+	touch logs/access.log logs/error.log
 
 	#Redirect NGINX logs to stdout.
 	echo 'buildpack=nginx at=logs-initialized'
-	tail -qF -n 0 logs/nginx/*.log
+	tail -qF -n 0 logs/*.log
 ) &
 
 # Start NGINX
