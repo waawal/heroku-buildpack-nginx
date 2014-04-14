@@ -34,8 +34,8 @@ mkdir -p ${BUILD_DIR}
 
 NGINX_CACHE_DIR=${CACHE_DIR}/nginx-${NGINX_VERSION}
 
-if [ ! -d ${NGINX_CACHE_DIR} ]
-then
+#if [ ! -d ${NGINX_CACHE_DIR} ]
+#then
 
 (
 	cd ${CACHE_DIR} &&
@@ -53,7 +53,7 @@ then
 	cd nginx-${NGINX_VERSION}
 	./configure \
 		--with-pcre=pcre-${PCRE_VERSION} \
-		--prefix=${BUILD_DIR}/nginx-${NGINX_VERSION} \
+		--prefix=${NGINX_CACHE_DIR}/dist/nginx-${NGINX_VERSION} \
 		--add-module=../ngx_pagespeed-release-${PAGESPEED_VERSION} > /dev/null
 
 	echo "Building NGINX"
@@ -63,7 +63,9 @@ then
 	make install
 )
 
-fi
+#fi
+
+cp -R ${NGINX_CACHE_DIR}/dist/nginx-${NGINX_VERSION} ${BUILD_DIR}
 
 cp -R ${BIN_DIR}/../config ${BUILD_DIR}/config
 
