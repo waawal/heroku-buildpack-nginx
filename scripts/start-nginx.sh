@@ -8,14 +8,14 @@ set -e
 CONFIG_FILE=nginx.conf.parsed
 
 # Filter config file usng erb to get $PORT
-if [ -f nginx.conf ]
+if [ -f nginx.conf.erb ]
 then
     erb nginx.conf > ${CONFIG_FILE}
 elif [ -f config/nginx.conf.erb ]
 then
     erb config/nginx.conf.erb > ${CONFIG_FILE}
 else
-    echo 'no config found' && exit 1
+    echo 'no suitable config found' && exit 1
 fi
 
 #Start log redirection.
@@ -36,4 +36,4 @@ fi
 
 echo 'buildpack=nginx at=nginx-start'
 
-nginx -p . -c ${CONFIG_FILE}
+( nginx -p . -c ${CONFIG_FILE} ) &
