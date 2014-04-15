@@ -16,13 +16,12 @@ logger -p user.notice -t "slugc[$$]" "nginx_build_pack nginx_install_start"
 
 BIN_DIR=$(cd $(dirname $0); pwd) # absolute path
 
+ROOT_DIR=$(cd ${BIN_DIR} && cd .. ; pwd) # absolute path
+
 # parse args
 BUILD_DIR=$1
 CACHE_DIR=$2
 ENV_DIR=$3
-
-echo checking Build Dir contents
-ls -l ${BUILD_DIR}
 
 LOGGER_FLAGS=""
 
@@ -35,49 +34,60 @@ mkdir -p ${BUILD_DIR}
 
 NGINX_CACHE_DIR=${CACHE_DIR}/nginx-${NGINX_VERSION}
 
+rm -rf ${NGINX_CACHE_DIR} # TODO: remove this one build is stable
+
+mkdir -p ${CACHE_DIR} # TODO: remove this one build is stable
+
+NGINX_DIST_DIR=${CACHE_DIR}/dist/nginx
+
+mkdir -p ${NGINX_DIST_DIR} # TODO: check if this is needed, make will probably create it without help
+
 if [ ! -d ${NGINX_CACHE_DIR} ]
 then
 
 (
-	cd ${CACHE_DIR} &&
-	pwd
-	echo "Downloading $nginx_tarball_url"
-	curl --silent -L ${nginx_tarball_url} | tar xz
+	cd ${CACHE_DIR}
 
-	echo "Downloading $pcre_tarball_url"
-	(cd nginx-${NGINX_VERSION} && curl --silent -L ${pcre_tarball_url} | tar xj )
+# TODO build PS on Heroku
 
-	echo "Downloading $ps_tarball_url"
+	echo "Downloading $ps_tarball_url" # expanded into a new directory (ngx_pagespeed-release-${PAGESPEED_VERSION})
 	curl --silent -L ${ps_tarball_url} | tar xz
 
-	echo "Running configure for NGINX"
+	echo "Downloading $nginx_tarball_url" # expanded into a new directory (nginx-${NGINX_VERSION})
+	curl --silent -L ${nginx_tarball_url} | tar xz
+
 	cd nginx-${NGINX_VERSION}
+
+	echo "Downloading $pcre_tarball_url"
+	curl --silent -L ${pcre_tarball_url} | tar xj
+
+	echo "Running configure for NGINX"
 	./configure \
 		--with-pcre=pcre-${PCRE_VERSION} \
-		--prefix=${NGINX_CACHE_DIR}/dist/nginx-${NGINX_VERSION} \
+		--prefix=${NGINX_DIST_DIR} \
 		--add-module=../ngx_pagespeed-release-${PAGESPEED_VERSION} > /dev/null
 
 	echo "Building NGINX"
 	make > /dev/null
 
 	echo "Installing NGINX"
-	make install
+	make install # TODO: clean out this DEBUG which shows where the install is
 )
 
 fi
 
-cp -R ${NGINX_CACHE_DIR}/dist/nginx-${NGINX_VERSION} ${BUILD_DIR}
+cp -R ${NGINX_DIST_DIR} ${BUILD_DIR}
 
-cp -R ${BIN_DIR}/../config ${BUILD_DIR}/config
+cp -R ${ROOT_DIR}/config ${BUILD_DIR}/config
 
-cp ${BIN_DIR}/../scripts/start-nginx.sh ${BUILD_DIR}
+cp ${ROOT_DIR}/scripts/start-nginx.sh ${BUILD_DIR}
 
 chmod +x ${BUILD_DIR}/*.sh
 
 BUILD_TARGET="$BUILD_DIR/.profile.d/nginx.sh"
 mkdir -p $(dirname ${BUILD_TARGET})
-echo "export NGINX_VERSION=nginx-${NGINX_VERSION}" > ${BUILD_TARGET}
-echo 'export NGINX_BASE_DIR=~/${NGINX_VERSION}' >> ${BUILD_TARGET}
-echo 'export PATH="$NGINX_BASE_DIR/sbin:$PATH"' >> ${BUILD_TARGET}
+echo "export NGINX_VERSION=nginx-${NGINX_VERSION}" > ${BUILD_TARGET} # double quoutes to allow expansion in this shell
+echo 'export NGINX_BASE_DIR=~/${NGINX_VERSION}' >> ${BUILD_TARGET} # single quote to expand this one at deployment time
+echo 'export PATH="$NGINX_BASE_DIR/sbin:$PATH"' >> ${BUILD_TARGET} # likewise expand this setting at deployment time
 
 logger -p user.notice -t "slugc[$$]" "nginx_build_pack nginx_install_end $LOGGER_FLAGS"
