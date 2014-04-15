@@ -1,7 +1,13 @@
-Heroku buildpack: Java
+Heroku buildpack: NGINX
 =========================
 
-This is a [Heroku buildpack](http://devcenter.heroku.com/articles/buildpack) for installing NGINX
+This is a [Heroku buildpack](http://devcenter.heroku.com/articles/buildpack) for compiling and running Google PageSpeed on NGINX.
+
+The example configuration demonstrates how to proxy another web-site.
+
+The NGINX config file is processed using 'erb' to allow the configuration to access the environment variables that you set in Heroku.
+
+'erb' is provided on Heroku dynos by default so there is no dependency on Ruby or any other programming language
 
 Usage
 -----
@@ -9,9 +15,9 @@ Usage
 Example usage:
 
     $ ls
-    Procfile  nginx.conf
+    Procfile  nginx.conf.erb
 
-    $ heroku create --stack cedar --buildpack <this buildpack>
+    $ heroku create --buildpack https://github.com/raymcdermott/heroku-buildpack-nginx
 
     $ git push heroku master
     ...
@@ -34,7 +40,7 @@ and then:
 
     $ ls -al
 
-and you'll see the .m2 and .maven directories are now present in your slug.
+and you'll see the nginx and config directories are now present in your slug.
 
 License
 -------
