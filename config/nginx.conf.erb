@@ -37,7 +37,7 @@ http {
 	pagespeed Domain engagent.h-care.eu;
 
 	pagespeed EnableFilters combine_css,extend_cache,rewrite_images;
-	pagespeed EnableFilters rewrite_css,rewrite_javascript,combine_javascript,lazyload_images,insert_dns_prefetch,inline_javascript,outline_javascript,sprite_images;
+	pagespeed EnableFilters rewrite_css,rewrite_javascript,combine_javascript,insert_dns_prefetch,inline_javascript,outline_javascript,sprite_images;
 
 	server {
 		listen <%= ENV['PORT'] %>;
