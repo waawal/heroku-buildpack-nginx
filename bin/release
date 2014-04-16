@@ -6,5 +6,6 @@ BUILD_DIR=$1
 cat <<EOF
 ---
 config_vars:
+PAGESPEED_DOMAIN_TLD: google.com
 addons:
 EOF

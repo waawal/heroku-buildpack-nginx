@@ -4,7 +4,7 @@
 # fail fast
 set -e
 
-NGINX_VERSION=1.4.4
+NGINX_VERSION=1.5.7
 PCRE_VERSION=8.21
 MOD_NGINX_PAGESPEED_VERSION=1.7.30.4-beta
 MOD_NGINX_PAGESPEED_DIRECTORY=ngx_pagespeed-release-${MOD_NGINX_PAGESPEED_VERSION}
@@ -90,8 +90,7 @@ chmod +x ${BUILD_DIR}/*.sh
 
 BUILD_TARGET="$BUILD_DIR/.profile.d/nginx.sh"
 mkdir -p $(dirname ${BUILD_TARGET})
-echo 'export PAGESPEED_DOMAIN_TLD=google.com' > ${BUILD_TARGET} # single quote to delay expansion until deployment time
-echo 'export NGINX_BASE_DIR=~/nginx' >> ${BUILD_TARGET} # single quote to delay expansion until deployment time
+echo 'export NGINX_BASE_DIR=~/nginx' > ${BUILD_TARGET} # single quote to delay expansion until deployment time
 echo 'export PATH="$NGINX_BASE_DIR/sbin:$PATH"' >> ${BUILD_TARGET} # likewise expand this setting at deployment time
 
 logger -p user.notice -t "slugc[$$]" "nginx_build_pack nginx_install_end $LOGGER_FLAGS"
