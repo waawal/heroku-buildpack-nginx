@@ -9,6 +9,15 @@ The NGINX config file is processed using 'erb' to allow the configuration to acc
 
 'erb' is provided on Heroku dynos by default so there is no dependency on Ruby or any other programming language
 
+Defaults
+--------
+
+By default the proxy will point to www.google.com. This is configured by setting PAGESPEED_DOMAIN_TLD on your app.
+
+For example
+
+ $ heroku config:set PAGESPEED_DOMAIN_TLD=mydomain.com
+
 Usage
 -----
 
@@ -26,6 +35,16 @@ Example usage:
     -----> NGINX detected
     ...
 
+
+Known Limitations
+-----------------
+
+The buildpack itself does not have any specific limitations, however you should be aware that proxying other domains may give odd results because of the following (non-exhaustive list of) conditions:
+
+- CORS: clients requesting resources from domains other than the one you serve may fail.
+- Authentication: Your back end server needs to support X-Forwards
+
+More information can be found by checking the PageSpeed FAQ and the NGINX reverse proxy pages
 
 Hacking
 -------

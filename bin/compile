@@ -68,14 +68,15 @@ then
         echo "Building NGINX with Google PageSpeed module"
         make > /dev/null
 
+        # Be sure to clean any existing NGINX distribution
+        rm -rf ${NGINX_DIST_DIR}
+
         echo "Making the installable distribution for NGINX"
         make install > /dev/null
     )
 fi
 
 # Copy the built nginx distribution and other needed artefacts
-
-echo "Installing ..."
 
 cp -R ${NGINX_DIST_DIR} ${BUILD_DIR}
 
@@ -89,6 +90,7 @@ chmod +x ${BUILD_DIR}/*.sh
 
 BUILD_TARGET="$BUILD_DIR/.profile.d/nginx.sh"
 mkdir -p $(dirname ${BUILD_TARGET})
+echo 'export PAGESPEED_DOMAIN_TLD=google.com' > ${BUILD_TARGET} # single quote to delay expansion until deployment time
 echo 'export NGINX_BASE_DIR=~/nginx' >> ${BUILD_TARGET} # single quote to delay expansion until deployment time
 echo 'export PATH="$NGINX_BASE_DIR/sbin:$PATH"' >> ${BUILD_TARGET} # likewise expand this setting at deployment time
 
