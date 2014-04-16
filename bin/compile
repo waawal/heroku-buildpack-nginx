@@ -36,25 +36,27 @@ NGINX_CACHE_DIR=${CACHE_DIR}/nginx-${NGINX_VERSION}
 
 NGINX_DIST_DIR=${CACHE_DIR}/dist/nginx
 
-#if [ ! -d ${NGINX_CACHE_DIR} ]
-#then
+if [ ! -d ${NGINX_CACHE_DIR} ]
+then
     (
         cd ${CACHE_DIR}
 
+        echo "Downloading ${ps_ngx_tarball_url}" # expanded into a new directory (MOD_NGINX_PAGESPEED_DIRECTORY)
         curl --silent -L ${ps_ngx_tarball_url} > ps_ngx.zip
         jar xf ps_ngx.zip
 
         (
+            echo "Downloading ${ps_tarball_url}" # expanded into a new directory (psol)
             cd ${MOD_NGINX_PAGESPEED_DIRECTORY}
             curl --silent -L ${ps_tarball_url} | tar xz
         )
 
-        echo "Downloading $nginx_tarball_url" # expanded into a new directory (nginx-${NGINX_VERSION})
+        echo "Downloading ${nginx_tarball_url}" # expanded into a new directory (nginx-${NGINX_VERSION})
         curl --silent -L ${nginx_tarball_url} | tar xz
 
         cd nginx-${NGINX_VERSION}
 
-        echo "Downloading $pcre_tarball_url"
+        echo "Downloading ${pcre_tarball_url}"
         curl --silent -L ${pcre_tarball_url} | tar xj
 
         echo "Running configure for NGINX"
@@ -69,9 +71,11 @@ NGINX_DIST_DIR=${CACHE_DIR}/dist/nginx
         echo "Making the installable distribution for NGINX"
         make install > /dev/null
     )
-#fi
+fi
 
 # Copy the built nginx distribution and other needed artefacts
+
+echo "Installing ..."
 
 cp -R ${NGINX_DIST_DIR} ${BUILD_DIR}
 
