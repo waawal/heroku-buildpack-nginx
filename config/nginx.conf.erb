@@ -45,7 +45,7 @@ http {
 
 		#Reverse proxy
         location / {
-                proxy_pass 	http://<%= ENV['PAGESPEED_DOMAIN_SUB_DOMAIN' || 'www'] %>.<%= ENV['PAGESPEED_DOMAIN_TLD'] %>;
+                proxy_pass 	http://<%= ENV['PAGESPEED_DOMAIN_SUB_DOMAIN'] || 'www' %>.<%= ENV['PAGESPEED_DOMAIN_TLD'] %>;
         }
 
         # Ensure requests for pagespeed optimized resources go to the pagespeed handler
