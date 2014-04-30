@@ -39,6 +39,8 @@ NGINX_DIST_DIR=${CACHE_DIR}/dist/nginx
 
 #TODO: Allow the build to be FORCED
 
+if [ ! -d ${CACHE_DIR} ] 
+then
     (
         cd ${CACHE_DIR}
 
@@ -79,7 +81,7 @@ NGINX_DIST_DIR=${CACHE_DIR}/dist/nginx
         echo "Making the installable distribution for NGINX"
         make install > /dev/null
     )
-
+fi
 
 # Copy the built nginx distribution and other needed artefacts
 
