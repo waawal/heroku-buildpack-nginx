@@ -67,7 +67,7 @@ NGINX_DIST_DIR=${CACHE_DIR}/dist/nginx
         ./configure \
             --with-pcre=pcre-${PCRE_VERSION} \
             --prefix=${NGINX_DIST_DIR} \
-            --add-module=../${MOD_NGINX_PAGESPEED_DIRECTORY} 
+            --add-module=../${MOD_NGINX_PAGESPEED_DIRECTORY} \
             --add-module=../ngx_http_substitutions_filter_module > /dev/null
 
         echo "Building NGINX with Google PageSpeed module"
