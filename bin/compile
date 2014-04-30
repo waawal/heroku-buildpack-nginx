@@ -39,7 +39,7 @@ NGINX_DIST_DIR=${CACHE_DIR}/dist/nginx
 
 #TODO: Allow the build to be FORCED
 
-if [ ! -d ${CACHE_DIR} ] 
+if [ ! -d ${NGINX_CACHE_DIR} ] 
 then
     (
         cd ${CACHE_DIR}
