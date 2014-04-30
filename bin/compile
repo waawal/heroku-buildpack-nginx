@@ -14,6 +14,7 @@ nginx_tarball_url=http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz
 pcre_tarball_url=http://garr.dl.sourceforge.net/project/pcre/pcre/${PCRE_VERSION}/pcre-${PCRE_VERSION}.tar.bz2
 ps_ngx_tarball_url=https://github.com/pagespeed/ngx_pagespeed/archive/release-${MOD_NGINX_PAGESPEED_VERSION}.zip
 ps_tarball_url=https://dl.google.com/dl/page-speed/psol/${PAGESPEED_VERSION}.tar.gz
+httpsubs_git=git://github.com/yaoweibin/ngx_http_substitutions_filter_module.git
 
 logger -p user.notice -t "slugc[$$]" "nginx_build_pack nginx_install_start"
 
@@ -43,6 +44,9 @@ then
     (
         cd ${CACHE_DIR}
 
+        echo "cloning the httpsubs git repo"
+        git clone $httpsubs_git
+
         echo "Downloading ${ps_ngx_tarball_url}" # expanded into a new directory (MOD_NGINX_PAGESPEED_DIRECTORY)
         curl --silent -L ${ps_ngx_tarball_url} > ps_ngx.zip
         jar xf ps_ngx.zip
@@ -65,7 +69,8 @@ then
         ./configure \
             --with-pcre=pcre-${PCRE_VERSION} \
             --prefix=${NGINX_DIST_DIR} \
-            --add-module=../${MOD_NGINX_PAGESPEED_DIRECTORY} > /dev/null
+            --add-module=../${MOD_NGINX_PAGESPEED_DIRECTORY} 
+            --add-module=../ngx_http_substitutions_filter_module > /dev/null
 
         echo "Building NGINX with Google PageSpeed module"
         make > /dev/null
