@@ -30,8 +30,8 @@ ENV_DIR=$3
 LOGGER_FLAGS=""
 
 #create the dirs if needed
-mkdir -p ${CACHE_DIR}
-mkdir -p ${BUILD_DIR}
+[ ! -d ${CACHE_DIR} ] && mkdir -p ${CACHE_DIR}
+[ ! -d ${BUILD_DIR} ] && mkdir -p ${BUILD_DIR}
 
 NGINX_CACHE_DIR=${CACHE_DIR}/nginx-${NGINX_VERSION}
 
