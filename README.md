@@ -43,6 +43,11 @@ Example usage:
     -----> NGINX detected
     ...
 
+You can take advantage of the fact that erb is always ran over the configuration file in the projects that use this buildpack. 
+
+The fact that this buildpack runs erb allows you to expand environment variables that suit your project needs. 
+
+Please take a look at the sample config file to see how easy it is to add config variables that suit your needs.
 
 Known Limitations
 -----------------
