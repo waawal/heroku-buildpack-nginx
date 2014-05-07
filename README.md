@@ -18,6 +18,14 @@ For example
 
  $ heroku config:set PAGESPEED_DOMAIN_TLD=mydomain.com
 
+you can also specify another sub-domain than the www default using PAGESPEED_DOMAIN_SUB_DOMAIN
+
+For example
+
+ $ heroku config:set PAGESPEED_DOMAIN_TLD=herokuapp.com PAGESPEED_DOMAIN_SUB_DOMAIN=my-heroku-app
+ 
+Tip: Providing both variables on the same line allows you to (re)set the variables and only restart the app once.
+
 Usage
 -----
 
@@ -59,7 +67,9 @@ and then:
 
     $ ls -al
 
-and you'll see the nginx and config directories are now present in your slug.
+and you'll see the nginx and config directories are now present in your slug. You can then start NGINX to prove out the full cycle.
+
+I am happy to take pull requests for improvements and additions.
 
 Contributions
 -------------
