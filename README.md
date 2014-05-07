@@ -61,6 +61,11 @@ and then:
 
 and you'll see the nginx and config directories are now present in your slug.
 
+Contributions
+-------------
+
+@kristofsajdak - added subs_filter module [useful when proxying via NGINX]
+
 License
 -------
 
