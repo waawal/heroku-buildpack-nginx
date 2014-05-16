@@ -3,6 +3,7 @@
 
 # fail fast
 set -e
+set -x
 
 NGINX_VERSION=1.5.7
 PCRE_VERSION=8.21
