@@ -22,12 +22,15 @@ else
     exit 1
 fi
 
+mkdir -p ${ROOT_DIR}/logs
+touch ${ROOT_DIR}/logs/access.log
+touch ${ROOT_DIR}/logs/error.log
+
+#Redirect NGINX logs to stdout.
+echo 'buildpack=nginx at=logs-initialized'
+
 #Start log redirection.
 (
-	#Initialize log directory.
-	mkdir -p ${ROOT_DIR}/logs
-	touch ${ROOT_DIR}/logs/access.log ${ROOT_DIR}/logs/error.log
-
 	#Redirect NGINX logs to stdout.
 	echo 'buildpack=nginx at=logs-initialized'
 	tail -qF -n 0 ${ROOT_DIR}/logs/*.log
