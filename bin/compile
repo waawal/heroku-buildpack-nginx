@@ -38,9 +38,6 @@ NGINX_CACHE_DIR=${CACHE_DIR}/nginx-${NGINX_VERSION}
 NGINX_DIST_DIR=${CACHE_DIR}/dist/nginx
 
 #TODO: Allow the build to be FORCED
-rm -rf ${CACHE_DIR}
-mkdir -p ${CACHE_DIR}
-
 if [ ! -d ${NGINX_CACHE_DIR} ]
 then
     (
