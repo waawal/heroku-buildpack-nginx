@@ -81,10 +81,6 @@ Contributions
 
 @kristofsajdak - added subs_filter module [useful when proxying via NGINX]
 
-Contributors
-------------
-@kristofsajdak - added the subs_filter module [useful in NGINX proxying]
-
 License
 -------
 

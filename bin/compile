@@ -69,6 +69,7 @@ then
         ./configure \
             --with-pcre=pcre-${PCRE_VERSION} \
             --prefix=${NGINX_DIST_DIR} \
+            --with-http_ssl_module \
             --add-module=../${MOD_NGINX_PAGESPEED_DIRECTORY} \
             --add-module=../ngx_http_substitutions_filter_module > /dev/null
 
