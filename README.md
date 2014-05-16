@@ -18,6 +18,14 @@ For example
 
  $ heroku config:set PAGESPEED_DOMAIN_TLD=mydomain.com
 
+you can also specify another sub-domain than the www default using PAGESPEED_DOMAIN_SUB_DOMAIN
+
+For example
+
+ $ heroku config:set PAGESPEED_DOMAIN_TLD=herokuapp.com PAGESPEED_DOMAIN_SUB_DOMAIN=my-heroku-app
+ 
+Tip: Providing both variables on the same line allows you to (re)set the variables and only restart the app once.
+
 Usage
 -----
 
@@ -35,6 +43,11 @@ Example usage:
     -----> NGINX detected
     ...
 
+You can take advantage of the fact that erb is always ran over the configuration file in the projects that use this buildpack. 
+
+The fact that this buildpack runs erb allows you to expand environment variables that suit your project needs. 
+
+Please take a look at the sample config file to see how easy it is to add config variables that suit your needs.
 
 Known Limitations
 -----------------
@@ -59,7 +72,14 @@ and then:
 
     $ ls -al
 
-and you'll see the nginx and config directories are now present in your slug.
+and you'll see the nginx and config directories are now present in your slug. You can then start NGINX to prove out the full cycle.
+
+I am happy to take pull requests for improvements and additions.
+
+Contributions
+-------------
+
+@kristofsajdak - added subs_filter module [useful when proxying via NGINX]
 
 Contributors
 ------------
