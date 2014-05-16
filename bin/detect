@@ -5,4 +5,6 @@ grep nginx $1/Procfile > /dev/null
 
 [ $? -eq 0 ] && echo 'nginx' && exit 0
 
+echo Could not detect nginx app
+
 exit 1
