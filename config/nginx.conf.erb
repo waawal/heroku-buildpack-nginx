@@ -28,6 +28,9 @@ http {
 	pagespeed Statistics on;
 	pagespeed StatisticsLogging on;
 
+# -- Enable Multiple PS Servers ... should work without it
+    pagespeed AddOptionsToUrls on;
+
 	pagespeed LogDir /app/pagespeed/logs; # Pagespeed dirs must start with a / (because Google says)
 	pagespeed FileCachePath /app/pagespeed/cache/ngx_pagespeed_cache; # Pagespeed dirs must start with a / (because Google says)
 

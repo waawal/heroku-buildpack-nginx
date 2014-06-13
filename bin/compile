@@ -4,11 +4,15 @@
 # fail fast
 set -e
 
-NGINX_VERSION=1.5.7
-PCRE_VERSION=8.21
-MOD_NGINX_PAGESPEED_VERSION=1.7.30.4-beta
+# Allow versions to be specificied by the requesting application
+
+[ -z "${NGINX_VERSION}" ] && NGINX_VERSION=1.6.0
+[ -z "${PCRE_VERSION}" ] && PCRE_VERSION=8.35
+[ -z "${PAGESPEED_VERSION}" ] && PAGESPEED_VERSION=1.8.31.3
+
+MOD_NGINX_PAGESPEED_VERSION=${PAGESPEED_VERSION}-beta
 MOD_NGINX_PAGESPEED_DIRECTORY=ngx_pagespeed-release-${MOD_NGINX_PAGESPEED_VERSION}
-PAGESPEED_VERSION=1.7.30.4
+
 
 nginx_tarball_url=http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz
 pcre_tarball_url=http://garr.dl.sourceforge.net/project/pcre/pcre/${PCRE_VERSION}/pcre-${PCRE_VERSION}.tar.bz2
@@ -37,13 +41,14 @@ NGINX_CACHE_DIR=${CACHE_DIR}/nginx-${NGINX_VERSION}
 
 NGINX_DIST_DIR=${CACHE_DIR}/dist/nginx
 
-#if [ "${FORCE_NGINX_REBUILD}" ]
-#then
+[ -z "${FORCE_REBUILD}" ] && REBUILD="true" || REBUILD="false"
+
+if [ "${REBUILD}" == "true" ]
+then
     rm -rf ${CACHE_DIR}
     mkdir -p ${CACHE_DIR}
-#fi
+fi
 
-#TODO: Allow the build to be FORCED
 if [ ! -d ${NGINX_CACHE_DIR} ]
 then
     (
