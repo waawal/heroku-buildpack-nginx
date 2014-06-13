@@ -41,7 +41,7 @@ NGINX_CACHE_DIR=${CACHE_DIR}/nginx-${NGINX_VERSION}
 
 NGINX_DIST_DIR=${CACHE_DIR}/dist/nginx
 
-[ -z "${FORCE_REBUILD}" ] && REBUILD="true" || REBUILD="false"
+[ -n "${FORCE_REBUILD}" ] && REBUILD="true" || REBUILD="false"
 
 if [ "${REBUILD}" == "true" ]
 then
