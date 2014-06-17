@@ -43,11 +43,11 @@ NGINX_DIST_DIR=${CACHE_DIR}/dist/nginx
 
 [ -n "${FORCE_REBUILD}" ] && REBUILD="true" || REBUILD="false"
 
-if [ "${REBUILD}" == "true" ]
-then
+#if [ "${REBUILD}" == "true" ]
+#then
     rm -rf ${CACHE_DIR}
     mkdir -p ${CACHE_DIR}
-fi
+#fi
 
 if [ ! -d ${NGINX_CACHE_DIR} ]
 then
