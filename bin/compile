@@ -6,9 +6,9 @@ set -e
 
 # Allow versions to be specificied by the requesting application
 
-[ -z "${NGINX_VERSION}" ] && NGINX_VERSION=1.6.0
+[ -z "${NGINX_VERSION}" ] && NGINX_VERSION=1.7.10
 [ -z "${PCRE_VERSION}" ] && PCRE_VERSION=8.35
-[ -z "${PAGESPEED_VERSION}" ] && PAGESPEED_VERSION=1.8.31.3
+[ -z "${PAGESPEED_VERSION}" ] && PAGESPEED_VERSION=1.9.32.3
 
 MOD_NGINX_PAGESPEED_VERSION=${PAGESPEED_VERSION}-beta
 MOD_NGINX_PAGESPEED_DIRECTORY=ngx_pagespeed-release-${MOD_NGINX_PAGESPEED_VERSION}
