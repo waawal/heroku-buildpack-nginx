@@ -6,7 +6,7 @@ set -e
 
 # Allow versions to be specificied by the requesting application
 
-[ -z "${NGINX_VERSION}" ] && NGINX_VERSION=1.7.10
+[ -z "${NGINX_VERSION}" ] && NGINX_VERSION=1.6.2
 [ -z "${PCRE_VERSION}" ] && PCRE_VERSION=8.35
 [ -z "${PAGESPEED_VERSION}" ] && PAGESPEED_VERSION=1.9.32.3
 
